@@ -21,12 +21,12 @@
       var host = location.origin.replace(/^http/, 'ws')
 	  document.write(host);
       var ws = new WebSocket(host);
-      ws.on('message', function (data, flags) {
+      ws.onmessage = function (data, flags) {
         var li = document.createElement('li');
         //li.innerHTML = JSON.parse(event.data);
 		li.innerHTML = data;
         document.querySelector('#pings').appendChild(li);
-      });
+      };
      /*
       ws.onmessage = function (event) {
         var li = document.createElement('li');
