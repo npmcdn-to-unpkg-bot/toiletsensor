@@ -22,6 +22,7 @@
 	  document.write(host);
       var ws = new WebSocket(host);
       ws.onmessage = function (data, flags) {
+		console.log(data);
 	    document.write(data);
       };
      /*
