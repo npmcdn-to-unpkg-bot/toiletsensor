@@ -3,6 +3,7 @@ var http = require("http")
 var express = require("express")
 var app = express()
 var port = process.env.PORT || 5000
+var connects = [];
 
 app.use(express.static(__dirname + "/"))
 
@@ -19,14 +20,22 @@ wss.on("connection", function(ws) {
     //ws.send(JSON.stringify(new Date()), function() {  })
   }, 1000)
 
+  connects.push(ws);
+
   console.log("websocket connection open")
   
   ws.on('message', function (message) {
-    ws.send(message);
+    broadcast(message);
   });
 
   ws.on("close", function() {
     console.log("websocket connection close")
     clearInterval(id)
   })
-})
+});
+
+function broadcast (message) {
+  connects.forEach(function (socket, i) {
+    socket.send(message);
+  });
+}
