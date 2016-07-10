@@ -21,7 +21,7 @@
 	</script> 
     <script>
       var host = location.origin.replace(/^http/, 'ws')
-	  document.write(host);
+	  //document.write(host);
       var ws = new WebSocket(host);
       ws.onmessage = function (event) {
         var li = document.createElement('li');
